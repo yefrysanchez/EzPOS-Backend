@@ -4,6 +4,7 @@ import authRounter from "./routes/authRouter"
 import employeeRouter from "./routes/employeeRouter"
 import categoryRounter from "./routes/categoryRouter"
 import prisma from "./db/prismaClient"
+import productsRouter from "./routes/productsRouter"
 config()
 const app = express()
 
@@ -23,6 +24,8 @@ app.use("/api/auth", authRounter)
 app.use("/api/employees", employeeRouter)
 //Product Category 
 app.use("/api/productcategory", categoryRounter)
+//Products
+app.use("/api/products", productsRouter)
 
 // Handle SIGINT to clean up Prisma client
 process.on('SIGINT', async () => {
