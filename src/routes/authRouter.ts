@@ -1,8 +1,9 @@
 import {Router} from "express"
-import { login } from "../controllers/authControllers"
+import { login, register } from "../controllers/authControllers"
 const authRounter = Router()
 
-authRounter.get("/", login)
+authRounter.post("/login", login)
+authRounter.post("/register", register)
 
 
 

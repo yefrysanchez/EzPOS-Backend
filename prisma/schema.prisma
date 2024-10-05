@@ -1,0 +1,74 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Account {
+  id            Int           @id @default(autoincrement())
+  name          String
+  email         String        @unique // Added email field
+  password      String // Added password field
+  taxPercentage Float         @default(0)
+  firstLogin    Boolean       @default(true)
+  employees     Employee[]
+  products      Product[]
+  transactions  Transaction[]
+  createdAt     DateTime      @default(now())
+}
+
+model Employee {
+  id           Int           @id @default(autoincrement())
+  name         String
+  pin          String // For employee PIN
+  isAdmin      Boolean       @default(false)
+  accountId    Int
+  account      Account       @relation(fields: [accountId], references: [id])
+  transactions Transaction[] // Added relation to Transaction
+  createdAt    DateTime      @default(now())
+}
+
+model ProductCategory {
+  id        Int       @id @default(autoincrement())
+  name      String
+  products  Product[]
+  createdAt DateTime  @default(now())
+}
+
+model Product {
+  id         Int    @id @default(autoincrement())
+  name       String
+  price      Float  @default(0)
+  accountId  Int
+  categoryId Int
+  account      Account                @relation(fields: [accountId], references: [id])
+  category     ProductCategory        @relation(fields: [categoryId], references: [id])
+  transactions ProductOnTransaction[]
+  createdAt    DateTime               @default(now())
+}
+
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  accountId   Int
+  employeeId  Int
+  totalAmount Float
+  createdAt   DateTime @default(now())
+
+  account  Account                @relation(fields: [accountId], references: [id])
+  employee Employee               @relation(fields: [employeeId], references: [id])
+  products ProductOnTransaction[]
+}
+
+model ProductOnTransaction {
+  transactionId Int
+  productId     Int
+  quantity      Int
+
+  transaction Transaction @relation(fields: [transactionId], references: [id])
+  product     Product     @relation(fields: [productId], references: [id])
+
+  @@id([transactionId, productId])
+}
