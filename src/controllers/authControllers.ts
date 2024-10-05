@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt"
-import { PrismaClient } from "@prisma/client";
-
-
-const prisma = new PrismaClient()
+import prisma from "../db/prismaClient";
 
 // Log in /////
 export async function login (req: Request, res: Response) {

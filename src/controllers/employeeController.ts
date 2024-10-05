@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
+import prisma from "../db/prismaClient";
 
-const prisma = new PrismaClient();
 //Create Employeee /////////////
 export async function createEmployee(req: Request, res: Response) {
   const { pin, firstName, lastName, isAdmin, accountId } = req.body;

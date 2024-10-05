@@ -8,16 +8,16 @@ generator client {
 }
 
 model Account {
-  id            Int           @id @default(autoincrement())
+  id            Int               @id @default(autoincrement())
   name          String
-  email         String        @unique // Added email field
+  email         String            @unique // Added email field
   password      String // Added password field
-  taxPercentage Float         @default(0)
-  firstLogin    Boolean       @default(true)
+  taxPercentage Float             @default(0)
+  firstLogin    Boolean           @default(true)
   employees     Employee[]
-  products      Product[]
+  category      ProductCategory[]
   transactions  Transaction[]
-  createdAt     DateTime      @default(now())
+  createdAt     DateTime          @default(now())
 }
 
 model Employee {
@@ -35,16 +35,16 @@ model ProductCategory {
   id        Int       @id @default(autoincrement())
   name      String
   products  Product[]
+  accountId Int
+  account   Account   @relation(fields: [accountId], references: [id])
   createdAt DateTime  @default(now())
 }
 
 model Product {
-  id         Int    @id @default(autoincrement())
-  name       String
-  price      Float  @default(0)
-  accountId  Int
-  categoryId Int
-  account      Account                @relation(fields: [accountId], references: [id])
+  id           Int                    @id @default(autoincrement())
+  name         String
+  price        Float                  @default(0)
+  categoryId   Int
   category     ProductCategory        @relation(fields: [categoryId], references: [id])
   transactions ProductOnTransaction[]
   createdAt    DateTime               @default(now())
