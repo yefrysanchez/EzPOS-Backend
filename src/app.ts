@@ -5,10 +5,16 @@ import employeeRouter from "./routes/employeeRouter"
 import categoryRounter from "./routes/categoryRouter"
 import prisma from "./db/prismaClient"
 import productsRouter from "./routes/productsRouter"
+import cors from "cors"
+
 config()
 const app = express()
 
 const PORT = process.env.PORT || 3000
+
+//cors
+
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 
 // Middleware to parse JSON bodies
