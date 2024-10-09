@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 
 //cors
 const corsOptions = {
-  origin: ["https://ezpos.pages.dev", "http://localhost:5500"],
+  origin: ["https://ezpos.pages.dev", "http://localhost:5173"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // If you need to include credentials in requests
   optionsSuccessStatus: 204, // For legacy browser support
