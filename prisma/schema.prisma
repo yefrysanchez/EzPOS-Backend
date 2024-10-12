@@ -14,6 +14,7 @@ model Account {
   password      String // Added password field
   taxPercentage Float             @default(0)
   firstLogin    Boolean           @default(true)
+  products      Product[]
   employees     Employee[]
   category      ProductCategory[]
   transactions  Transaction[]
@@ -44,6 +45,8 @@ model Product {
   id           Int                    @id @default(autoincrement())
   name         String
   price        Float                  @default(0)
+  accountId Int
+  account   Account   @relation(fields: [accountId], references: [id])
   categoryId   Int
   category     ProductCategory        @relation(fields: [categoryId], references: [id])
   transactions ProductOnTransaction[]

@@ -1,9 +1,10 @@
 import {Router} from "express"
-import { login, register } from "../controllers/authControllers"
+import { handleFirstLogin, login, register } from "../controllers/authControllers"
 const authRounter = Router()
 
 authRounter.post("/login", login)
 authRounter.post("/register", register)
+authRounter.patch("/updateacc/:id", handleFirstLogin)
 
 
 
