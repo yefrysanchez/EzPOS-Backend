@@ -3,7 +3,7 @@ import prisma from "../db/prismaClient";
 
 // POST create products
 export async function createProducts(req: Request, res: Response) {
-  const { name, price, categoryId } = req.body;
+  const { name, price, categoryId, accountId } = req.body;
   if(!name || !price || !categoryId){
     return res.status(400).json("Missing fields.");
   }
@@ -13,6 +13,7 @@ export async function createProducts(req: Request, res: Response) {
         name,
         price,
         categoryId,
+        accountId
       },
     });
 
