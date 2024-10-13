@@ -68,8 +68,7 @@ export async function handleFirstLogin(req: Request, res: Response) {
       data: { firstLogin, taxPercentage },
     });
     
-    // Use 204 No Content if you don't return the updated account
-    return res.status(204).send(); 
+    return res.status(200).json(updateAccount); 
   } catch (error) {
     const e = error as any;
 
