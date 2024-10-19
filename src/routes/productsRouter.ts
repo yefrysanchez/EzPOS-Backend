@@ -1,10 +1,11 @@
 import {Router} from "express"
-import { createProducts, deleteProduct, getProducts } from "../controllers/productsController"
+import { createProducts, deleteProduct, editProduct, getProducts } from "../controllers/productsController"
 
 const productsRouter = Router()
 
 productsRouter.get("/" , getProducts)
 productsRouter.post("/" , createProducts)
+productsRouter.patch("/:id" , editProduct)
 productsRouter.delete("/:id" , deleteProduct)
 
 
